@@ -178,7 +178,8 @@ const createBuilder = (self, _styler, _isEmpty) => {
 		}
 
 		if (arguments_.length === 2) {
-			return applyStyle(builder, arguments_[0] + ' ' + arguments_[1]);
+			// The template literal matches `Array#join` coercion (`null` and `undefined` become empty, objects use `toString`) while being faster.
+			return applyStyle(builder, `${arguments_[0] ?? ''} ${arguments_[1] ?? ''}`);
 		}
 
 		return applyStyle(builder, arguments_.join(' '));
